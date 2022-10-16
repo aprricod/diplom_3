@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.WebDriverRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -7,13 +8,19 @@ import ru.yandex.praktikum.stellar.MainPage;
 import ru.yandex.praktikum.stellar.RegisterPage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserRegistrationTest {
+
+    static String baseURL = "https://stellarburgers.nomoreparties.site/";
+    static String loginURL = "https://stellarburgers.nomoreparties.site/login";
+
+
     @BeforeClass
     public static void setProperties() {
         MainPage mainPage =
 
-                open("https://stellarburgers.nomoreparties.site/", MainPage.class);
+                open(baseURL, MainPage.class);
     }
 
     @Test
@@ -33,14 +40,13 @@ public class UserRegistrationTest {
         RegisterPage registerPage = page(RegisterPage.class);
         registerPage.clickLoginButton();
         registerPage.clickRegistrationPageLink();
-        registerPage.setName("тест4");
-        registerPage.setEmail("stellar.test4@yopmail.com");
+        registerPage.setName("тест7");
+        registerPage.setEmail("stellar.test7@yopmail.com");
         registerPage.setPassword("123456");
         registerPage.clickRegistrationButton();
-        MainPage mainPage = page(MainPage.class);
         Thread.sleep(3000);
-        mainPage.checkLoginPageTitle();
-        Thread.sleep(3000);
+        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        assertEquals(loginURL, currentUrl);
     }
 
     @AfterClass
