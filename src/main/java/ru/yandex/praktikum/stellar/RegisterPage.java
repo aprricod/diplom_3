@@ -1,5 +1,6 @@
 package ru.yandex.praktikum.stellar;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -55,11 +56,11 @@ public class RegisterPage extends BasePage {
         passwordInput.setValue(password);
     }
 
-    public void clickRegistrationButton(){
+    public void clickRegistrationButton() {
         registrationButton.click();
     }
 
-    public void checkPasswordErrorMsg() {
-        passwordErrorMsg.isDisplayed();
+    public void checkPasswordErrorMsgDisplayed() {
+        passwordErrorMsg.shouldHave(Condition.exactText("Некорректный пароль"));
     }
 }

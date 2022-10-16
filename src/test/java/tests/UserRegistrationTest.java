@@ -28,11 +28,11 @@ public class UserRegistrationTest {
         RegisterPage registerPage = page(RegisterPage.class);
         registerPage.clickLoginButton();
         registerPage.clickRegistrationPageLink();
-        registerPage.setName("тест4");
-        registerPage.setEmail("stellar.test4@yopmail.com");
+        registerPage.setName("тест1");
+        registerPage.setEmail("stellar.test1@yopmail.com");
         registerPage.setPassword("12345");
         registerPage.clickRegistrationButton();
-        registerPage.checkPasswordErrorMsg();
+        registerPage.checkPasswordErrorMsgDisplayed();
     }
 
     @Test
