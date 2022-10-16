@@ -1,6 +1,5 @@
 package ru.yandex.praktikum.stellar;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -11,9 +10,9 @@ public class RegisterPage extends BasePage {
     @FindBy(how = How.CLASS_NAME, using = "button_button__33qZ0")
     private SelenideElement loginButton;
 
-    // кнопка зарегистрироваться
+    // линк для перехода на страницу регистрации
     @FindBy(how = How.XPATH, using = "//a[text()='Зарегистрироваться']")
-    private SelenideElement registerButton;
+    private SelenideElement registrationPageLink;
 
     // поле ввода имени
     @FindBy(how = How.XPATH, using = "//label[text()='Имя']/following-sibling::input[@name='name']")
@@ -27,6 +26,10 @@ public class RegisterPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@name='Пароль']")
     private SelenideElement passwordInput;
 
+    // зарегистрироваться
+    @FindBy(how = How.CLASS_NAME, using = "button_button__33qZ0")
+    private SelenideElement registrationButton;
+
     // сообщение об ошибке для пароля
     @FindBy(how = How.CLASS_NAME, using = "input__error")
     private SelenideElement passwordErrorMsg;
@@ -36,8 +39,8 @@ public class RegisterPage extends BasePage {
         loginButton.click();
     }
 
-    public void clickRegisterButton() {
-        registerButton.click();
+    public void clickRegistrationPageLink() {
+        registrationPageLink.click();
     }
 
     public void setName(String name) {
@@ -50,6 +53,10 @@ public class RegisterPage extends BasePage {
 
     public void setPassword(String password) {
         passwordInput.setValue(password);
+    }
+
+    public void clickRegistrationButton(){
+        registrationButton.click();
     }
 
     public void checkPasswordErrorMsg() {
