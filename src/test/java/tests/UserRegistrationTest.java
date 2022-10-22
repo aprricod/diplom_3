@@ -1,9 +1,12 @@
 package tests;
 
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
+import ru.yandex.praktikum.stellar.LoginPage;
 import ru.yandex.praktikum.stellar.MainPage;
 import ru.yandex.praktikum.stellar.RegisterPage;
 
@@ -15,12 +18,14 @@ public class UserRegistrationTest {
     static String baseURL = "https://stellarburgers.nomoreparties.site/";
     static String loginURL = "https://stellarburgers.nomoreparties.site/login";
 
+    String userName = RandomStringUtils.randomAlphabetic(6);
+    String userEmail = RandomStringUtils.randomAlphanumeric(10) + "@mail.com";
+    String userPassword = RandomStringUtils.randomAlphabetic(6);
 
-    @BeforeClass
-    public static void setProperties() {
-        MainPage mainPage =
-
-                open(baseURL, MainPage.class);
+    @Before
+    @Step("before")
+    public void setProperties() {
+        MainPage mainPage = open(baseURL, MainPage.class);
     }
 
     @Test
@@ -28,28 +33,26 @@ public class UserRegistrationTest {
         RegisterPage registerPage = page(RegisterPage.class);
         registerPage.clickLoginButton();
         registerPage.clickRegistrationPageLink();
-        registerPage.setName("тест1");
-        registerPage.setEmail("stellar.test1@yopmail.com");
-        registerPage.setPassword("12345");
+        registerPage.setUserData("тест1", "stellar.test1@yopmail.com", "12345");
         registerPage.clickRegistrationButton();
         registerPage.checkPasswordErrorMsgDisplayed();
     }
 
     @Test
-    public void createNewUserTest() throws InterruptedException {
+    public void createNewUserTest() {
+        LoginPage loginPage = page(LoginPage.class);
         RegisterPage registerPage = page(RegisterPage.class);
         registerPage.clickLoginButton();
         registerPage.clickRegistrationPageLink();
-        registerPage.setName("тест7");
-        registerPage.setEmail("stellar.test7@yopmail.com");
-        registerPage.setPassword("123456");
+        registerPage.setUserData(userName, userEmail, userPassword);
         registerPage.clickRegistrationButton();
-        Thread.sleep(3000);
+        loginPage.checkRecoveryPassButton();
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
         assertEquals(loginURL, currentUrl);
     }
 
     @AfterClass
+    @Step("after")
     public static void closeDriver() {
         closeWebDriver();
     }

@@ -44,15 +44,9 @@ public class RegisterPage extends BasePage {
         registrationPageLink.click();
     }
 
-    public void setName(String name) {
+    public void setUserData(String name, String email, String password) {
         nameInput.setValue(name);
-    }
-
-    public void setEmail(String email) {
         emailInput.setValue(email);
-    }
-
-    public void setPassword(String password) {
         passwordInput.setValue(password);
     }
 
