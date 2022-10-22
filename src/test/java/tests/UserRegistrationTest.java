@@ -1,7 +1,9 @@
 package tests;
 
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +31,8 @@ public class UserRegistrationTest {
     }
 
     @Test
+    @DisplayName("Check incorrect password notification")
+    @Description("Check if incorrect password notification is appeared in case of short password")
     public void checkPasswordLengthErrorTest() {
         RegisterPage registerPage = page(RegisterPage.class);
         registerPage.clickLoginButton();
@@ -39,6 +43,9 @@ public class UserRegistrationTest {
     }
 
     @Test
+    @DisplayName("Create new user")
+    @Description("Create new user with correct user data")
+    @Step("Create user")
     public void createNewUserTest() {
         LoginPage loginPage = page(LoginPage.class);
         RegisterPage registerPage = page(RegisterPage.class);
