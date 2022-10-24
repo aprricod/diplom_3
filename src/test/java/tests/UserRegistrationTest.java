@@ -35,8 +35,10 @@ public class UserRegistrationTest {
     @Description("Check if incorrect password notification is appeared in case of short password")
     public void checkPasswordLengthErrorTest() {
         RegisterPage registerPage = page(RegisterPage.class);
-        registerPage.clickLoginButton();
-        registerPage.clickRegistrationPageLink();
+        LoginPage loginPage = page(LoginPage.class);
+        MainPage mainPage = page(MainPage.class);
+        mainPage.clickEnterToAccountButton();
+        loginPage.clickRegistrationPageLink();
         registerPage.setUserData("тест1", "stellar.test1@yopmail.com", "12345");
         registerPage.clickRegistrationButton();
         registerPage.checkPasswordErrorMsgDisplayed();
@@ -49,8 +51,9 @@ public class UserRegistrationTest {
     public void createNewUserTest() {
         LoginPage loginPage = page(LoginPage.class);
         RegisterPage registerPage = page(RegisterPage.class);
-        registerPage.clickLoginButton();
-        registerPage.clickRegistrationPageLink();
+        MainPage mainPage = page(MainPage.class);
+        mainPage.clickEnterToAccountButton();
+        loginPage.clickRegistrationPageLink();
         registerPage.setUserData(userName, userEmail, userPassword);
         registerPage.clickRegistrationButton();
         loginPage.checkRecoveryPassButton();

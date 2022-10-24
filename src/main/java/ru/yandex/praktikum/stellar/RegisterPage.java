@@ -7,14 +7,6 @@ import org.openqa.selenium.support.How;
 
 public class RegisterPage extends BasePage {
 
-    // кнопка войти в аккаунт
-    @FindBy(how = How.CLASS_NAME, using = "button_button__33qZ0")
-    private SelenideElement loginButton;
-
-    // линк для перехода на страницу регистрации
-    @FindBy(how = How.XPATH, using = "//a[text()='Зарегистрироваться']")
-    private SelenideElement registrationPageLink;
-
     // поле ввода имени
     @FindBy(how = How.XPATH, using = "//label[text()='Имя']/following-sibling::input[@name='name']")
     private SelenideElement nameInput;
@@ -31,18 +23,13 @@ public class RegisterPage extends BasePage {
     @FindBy(how = How.CLASS_NAME, using = "button_button__33qZ0")
     private SelenideElement registrationButton;
 
+    // линк для перехода на страницу входа
+    @FindBy(how = How.XPATH, using = "//a[text()='Войти']")
+    private SelenideElement loginPageLink;
+
     // сообщение об ошибке для пароля
     @FindBy(how = How.CLASS_NAME, using = "input__error")
     private SelenideElement passwordErrorMsg;
-
-
-    public void clickLoginButton() {
-        loginButton.click();
-    }
-
-    public void clickRegistrationPageLink() {
-        registrationPageLink.click();
-    }
 
     public void setUserData(String name, String email, String password) {
         nameInput.setValue(name);
@@ -56,5 +43,9 @@ public class RegisterPage extends BasePage {
 
     public void checkPasswordErrorMsgDisplayed() {
         passwordErrorMsg.shouldHave(Condition.exactText("Некорректный пароль"));
+    }
+
+    public void clickLoginPageLink() {
+        loginPageLink.click();
     }
 }
