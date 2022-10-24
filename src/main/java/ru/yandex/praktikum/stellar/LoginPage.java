@@ -47,4 +47,8 @@ public class LoginPage extends BasePage {
     public void clickRegistrationPageLink() {
         registrationPageLink.click();
     }
+
+    public void clickRecoveryPassButton(){
+        recoveryPassButton.click();
+    }
 }

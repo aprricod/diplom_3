@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.yandex.praktikum.stellar.LoginPage;
 import ru.yandex.praktikum.stellar.MainPage;
+import ru.yandex.praktikum.stellar.PasswordRestorePage;
 import ru.yandex.praktikum.stellar.RegisterPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -61,5 +62,16 @@ public class UserLoginTest {
     }
 
     // вход через кнопку в форме восстановления пароля
-
+    @Test
+    public void loginWithEnterToAccountButtonOnResetPasswordFormTest() {
+        MainPage mainPage = page(MainPage.class);
+        LoginPage loginPage = page(LoginPage.class);
+        PasswordRestorePage passwordRestorePage = page(PasswordRestorePage.class);
+        mainPage.clickEnterToAccountButton();
+        loginPage.clickRecoveryPassButton();
+        passwordRestorePage.clickLoginPageLink();
+        loginPage.setUserData(userEmail, userPassword);
+        loginPage.clickLoginButton();
+        mainPage.checkCreateOrderButton();
+    }
 }
