@@ -6,9 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class AccountPage extends BasePage{
-    // инпут имя
-    @FindBy(how = How.XPATH, using = "//input[@name='Name']")
-    private SelenideElement nameInput;
 
     // линк конструктор
     @FindBy(how = How.XPATH, using = "//p[text()='Конструктор']")
@@ -17,6 +14,14 @@ public class AccountPage extends BasePage{
     // лого стеллар
     @FindBy(how = How.XPATH, using = "//div[@class='AppHeader_header__logo__2D0X2']/a")
     private SelenideElement stellarLogo;
+
+    // инпут имя
+    @FindBy(how = How.XPATH, using = "//input[@name='Name']")
+    private SelenideElement nameInput;
+
+    // кнопка выход
+    @FindBy(how = How.XPATH, using = "//button[text()='Выход']")
+    private SelenideElement logoutButton;
 
     public void checkIfInputVisible(){
         nameInput.shouldBe(Condition.visible);
@@ -28,5 +33,9 @@ public class AccountPage extends BasePage{
 
     public void clickStellarLogo(){
         stellarLogo.click();
+    }
+
+    public void clickExitButton(){
+        logoutButton.click();
     }
 }

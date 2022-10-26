@@ -14,6 +14,7 @@ public class UserLoginTest {
 
     static String baseURL = "https://stellarburgers.nomoreparties.site/";
     static String profileURL = "https://stellarburgers.nomoreparties.site/account/profile";
+    static String loginURL = "https://stellarburgers.nomoreparties.site/login";
 
     String userEmail = "stellar.test1@yopmail.com";
     String userPassword = "123456";
@@ -119,6 +120,22 @@ public class UserLoginTest {
         mainPage.checkCreateOrderButton();
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
         assertEquals(baseURL, currentUrl);
+    }
+
+    // выход через кнопку «Выход»,
+    @Test
+    public void logoutFromAccountTest() {
+        MainPage mainPage = page(MainPage.class);
+        LoginPage loginPage = page(LoginPage.class);
+        AccountPage accountPage = page(AccountPage.class);
+        mainPage.clickAccountButton();
+        loginPage.setUserData(userEmail, userPassword);
+        loginPage.clickLoginButton();
+        mainPage.clickAccountButton();
+        accountPage.clickExitButton();
+        loginPage.checkRecoveryPassButton();
+        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        assertEquals(loginURL, currentUrl);
     }
 
     @AfterClass
