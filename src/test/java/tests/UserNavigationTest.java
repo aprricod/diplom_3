@@ -3,14 +3,17 @@ package tests;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Point;
 import ru.yandex.praktikum.stellar.*;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-public class UserLoginTest {
+public class UserNavigationTest {
 
     static String baseURL = "https://stellarburgers.nomoreparties.site/";
     static String profileURL = "https://stellarburgers.nomoreparties.site/account/profile";
@@ -136,6 +139,38 @@ public class UserLoginTest {
         loginPage.checkRecoveryPassButton();
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
         assertEquals(loginURL, currentUrl);
+    }
+
+    @Test
+    public void subsectionScrollTest() throws InterruptedException {
+        MainPage mainPage = page(MainPage.class);
+
+        Point firstBunPosition = mainPage.bunPosition().getLocation();
+//        int xBun1 = firstBunPosition.getX();
+//        int yBun1 = firstBunPosition.getY();
+
+        mainPage.clickSauceSwitcher();
+
+        Thread.sleep(2000);
+
+        Point secondBunPosition = mainPage.bunPosition().getLocation();
+//        int xBun2 = firstBunPosition.getX();
+//        int yBun2 = firstBunPosition.getY();
+
+//        Point firstSaucePosition = mainPage.saucePosition().getLocation();
+//        int xSauce1 = firstSaucePosition.getX();
+//        int ySauce1 = firstSaucePosition.getY();
+//
+//        Point firstFillingPosition = mainPage.fillingPosition().getLocation();
+//        int xFilling1 = firstFillingPosition.getX();
+//        int yFilling1 = firstFillingPosition.getY();
+
+        assertNotEquals(firstBunPosition, secondBunPosition);
+        System.out.println(firstBunPosition);
+        System.out.println(secondBunPosition);
+//        assertNotEquals(yBun1, yBun2);
+//        System.out.println(yBun1);
+//        System.out.println(yBun2);
     }
 
     @AfterClass
