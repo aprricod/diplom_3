@@ -1,9 +1,11 @@
 package tests;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import org.junit.AfterClass;
-import org.junit.Assert;
+import io.qameta.allure.junit4.DisplayName;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Point;
@@ -30,6 +32,9 @@ public class UserNavigationTest {
 
     // вход через кнопку «Личный кабинет»,
     @Test
+    @DisplayName("Login test")
+    @Description("Login with account button")
+    @Step("Login")
     public void loginWithAccountButtonTest() {
         MainPage mainPage = page(MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
@@ -41,6 +46,9 @@ public class UserNavigationTest {
 
     // вход по кнопке «Войти в аккаунт» на главной,
     @Test
+    @DisplayName("Login test")
+    @Description("Login with login button")
+    @Step("Login")
     public void loginWithEnterToAccountButtonTest() {
         MainPage mainPage = page(MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
@@ -52,6 +60,9 @@ public class UserNavigationTest {
 
     // вход через кнопку в форме регистрации
     @Test
+    @DisplayName("Login test")
+    @Description("Login on registration form")
+    @Step("Login")
     public void loginWithEnterToAccountButtonOnRegFormTest() {
         MainPage mainPage = page(MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
@@ -66,6 +77,9 @@ public class UserNavigationTest {
 
     // вход через кнопку в форме восстановления пароля
     @Test
+    @DisplayName("Login test")
+    @Description("Login on password restore form")
+    @Step("Login")
     public void loginWithEnterToAccountButtonOnResetPasswordFormTest() {
         MainPage mainPage = page(MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
@@ -80,6 +94,9 @@ public class UserNavigationTest {
 
     // Переход в личный кабинет
     @Test
+    @DisplayName("Navigation to user account")
+    @Description("Navigation to user account test")
+    @Step("Navigation to account")
     public void openUserAccountTest() {
         MainPage mainPage = page(MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
@@ -95,6 +112,9 @@ public class UserNavigationTest {
 
     // Переход из личного кабинета в конструктор
     @Test
+    @DisplayName("Navigation to constructor")
+    @Description("Navigation from user account to constructor test")
+    @Step("Navigation")
     public void navigateToConstructorFromUserAccountTest() {
         MainPage mainPage = page(MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
@@ -111,6 +131,9 @@ public class UserNavigationTest {
 
     // Переход из личного кабинета в конструктор по клику на логотип
     @Test
+    @DisplayName("Navigation to constructor")
+    @Description("Navigation from user account to constructor test by clicking logo")
+    @Step("Navigation")
     public void navigateToConstructorFromUserAccountByClickOnLogoTest() {
         MainPage mainPage = page(MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
@@ -127,6 +150,9 @@ public class UserNavigationTest {
 
     // выход через кнопку «Выход»,
     @Test
+    @DisplayName("Logout from account")
+    @Description("Logout from account test")
+    @Step("Logout")
     public void logoutFromAccountTest() {
         MainPage mainPage = page(MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
@@ -141,23 +167,27 @@ public class UserNavigationTest {
         assertEquals(loginURL, currentUrl);
     }
 
+    // проверка скролла
     @Test
-    public void subsectionScrollTest() throws InterruptedException {
+    @DisplayName("Scroll test")
+    @Description("Scroll to subsection test")
+    @Step("Scroll")
+    public void subsectionScrollTest() {
         MainPage mainPage = page(MainPage.class);
 
         Point firstSaucePosition = mainPage.saucePosition().getLocation();
         mainPage.clickSauceSwitcher();
-        Thread.sleep(2000);
+        mainPage.saucePosition().shouldBe(Condition.visible);
         Point secondSaucePosition = mainPage.saucePosition().getLocation();
 
         Point firstFillingPosition = mainPage.fillingPosition().getLocation();
         mainPage.clickFillingSwitcher();
-        Thread.sleep(2000);
+        mainPage.fillingPosition().shouldBe(Condition.visible);
         Point secondFillingPosition = mainPage.fillingPosition().getLocation();
 
         Point firstBunPosition = mainPage.bunPosition().getLocation();
         mainPage.clickBunSwitcher();
-        Thread.sleep(2000);
+        mainPage.bunPosition().shouldBe(Condition.visible);
         Point secondBunPosition = mainPage.bunPosition().getLocation();
 
         assertNotEquals(firstSaucePosition, secondSaucePosition);
@@ -165,9 +195,9 @@ public class UserNavigationTest {
         assertNotEquals(firstBunPosition, secondBunPosition);
     }
 
-    @AfterClass
+    @After
     @Step("after")
-    public static void closeDriver() {
+    public void closeDriver() {
         closeWebDriver();
     }
 }

@@ -2,7 +2,6 @@ package ru.yandex.praktikum.stellar;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -60,36 +59,12 @@ public class MainPage extends BasePage {
         bunSwitcher.click();
     }
 
-    public void bunPosition1() {
-        Point position = titleBun.getLocation();
-        int x = position.getX();
-        int y = position.getY();
-        System.out.println("х булки" + x);
-        System.out.println("у булки" + y);
-    }
-
     public void clickSauceSwitcher() {
         sauceSwitcher.click();
     }
 
-    public void saucePosition1() {
-        Point position = titleSauce.getLocation();
-        int x = position.getX();
-        int y = position.getY();
-        System.out.println("х соуса" + x);
-        System.out.println("у соуса" + y);
-    }
-
     public void clickFillingSwitcher() {
         fillingSwitcher.click();
-    }
-
-    public void fillingPosition1() {
-        Point position = titleFilling.getLocation();
-        int x = position.getX();
-        int y = position.getY();
-        System.out.println("х начинки" + x);
-        System.out.println("у начинки" + y);
     }
 
     public SelenideElement bunPosition() {
