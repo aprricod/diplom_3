@@ -145,32 +145,24 @@ public class UserNavigationTest {
     public void subsectionScrollTest() throws InterruptedException {
         MainPage mainPage = page(MainPage.class);
 
-        Point firstBunPosition = mainPage.bunPosition().getLocation();
-//        int xBun1 = firstBunPosition.getX();
-//        int yBun1 = firstBunPosition.getY();
-
+        Point firstSaucePosition = mainPage.saucePosition().getLocation();
         mainPage.clickSauceSwitcher();
-
         Thread.sleep(2000);
+        Point secondSaucePosition = mainPage.saucePosition().getLocation();
 
+        Point firstFillingPosition = mainPage.fillingPosition().getLocation();
+        mainPage.clickFillingSwitcher();
+        Thread.sleep(2000);
+        Point secondFillingPosition = mainPage.fillingPosition().getLocation();
+
+        Point firstBunPosition = mainPage.bunPosition().getLocation();
+        mainPage.clickBunSwitcher();
+        Thread.sleep(2000);
         Point secondBunPosition = mainPage.bunPosition().getLocation();
-//        int xBun2 = firstBunPosition.getX();
-//        int yBun2 = firstBunPosition.getY();
 
-//        Point firstSaucePosition = mainPage.saucePosition().getLocation();
-//        int xSauce1 = firstSaucePosition.getX();
-//        int ySauce1 = firstSaucePosition.getY();
-//
-//        Point firstFillingPosition = mainPage.fillingPosition().getLocation();
-//        int xFilling1 = firstFillingPosition.getX();
-//        int yFilling1 = firstFillingPosition.getY();
-
+        assertNotEquals(firstSaucePosition, secondSaucePosition);
+        assertNotEquals(firstFillingPosition, secondFillingPosition);
         assertNotEquals(firstBunPosition, secondBunPosition);
-        System.out.println(firstBunPosition);
-        System.out.println(secondBunPosition);
-//        assertNotEquals(yBun1, yBun2);
-//        System.out.println(yBun1);
-//        System.out.println(yBun2);
     }
 
     @AfterClass
